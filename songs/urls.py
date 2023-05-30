@@ -1,7 +1,7 @@
 from django.urls import path
-from . import views
+from .views import song_list, song_detail
 
 urlpatterns = [
-    # path('', views.INSERTVIEWNAME ),
-    # path('<int:pk>/', views.INSERTVIEWNAME),
+    path('music/', song_list, name='music_list'),
+    path('music/<int:pk>/', song_detail, name='music_detail'),
 ]
