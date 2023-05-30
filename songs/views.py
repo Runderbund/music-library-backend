@@ -7,10 +7,9 @@ from .models import Song
 
 @api_view(['GET'])
 def song_list(request):
-    if request.method == 'GET':
-        songs = Song.objects.all()
-        serializer = SongSerializer(songs, many=True)
-        return Response(serializer.data)
+    songs = Song.objects.all()
+    serializer = SongSerializer(songs, many=True)
+    return Response(serializer.data)
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def song_detail(request, pk):
@@ -38,7 +37,11 @@ def song_create(request): # Handles creation of a new Song entry
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['POST'])
+def song_like(request, pk):
+    song = get_object_or_404(Song, pk=pk)
+    song.likes += 1
+    song.save()
+    return Response({'likes': song.likes})
 
-# TODO: Add the ability to “like” a song through the web API and have the number of likes saved in the database with the song. 
 # TODO: Use Postman to make a POST, PUT, DELETE, and both GET requests (get by id and get all) request to my REST web API, save it to a collection, and then export it as a JSON from Postman.
-# TODO: Create an ERD for the API’s Model, showing proper fieldtypes.
