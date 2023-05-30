@@ -37,3 +37,8 @@ def song_create(request): # Handles creation of a new Song entry
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# TODO: Add the ability to “like” a song through the web API and have the number of likes saved in the database with the song. 
+# TODO: Use Postman to make a POST, PUT, DELETE, and both GET requests (get by id and get all) request to my REST web API, save it to a collection, and then export it as a JSON from Postman.
+# TODO: Create an ERD for the API’s Model, showing proper fieldtypes.
